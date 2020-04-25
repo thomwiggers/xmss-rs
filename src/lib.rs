@@ -32,7 +32,7 @@ extern "C" {
 // use checkparams script
 const XMSS_SETTINGS: XMSSParams = XMSSParams{
     func: 1,
-    n: 32,
+    n: 16,
     wots_w: 256,
     wots_log_w: 8,
     wots_len1: 32,
