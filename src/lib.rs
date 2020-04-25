@@ -31,21 +31,21 @@ extern "C" {
 
 // use checkparams script
 const XMSS_SETTINGS: XMSSParams = XMSSParams{
-    func: 0,
+    func: 1,
     n: 32,
-    wots_w: 16,
-    wots_log_w: 4,
-    wots_len1: 64,
-    wots_len2: 3,
-    wots_len: 67,
-    wots_sig_bytes: 2144,
-    full_height: 10,
-    tree_height: 10,
+    wots_w: 256,
+    wots_log_w: 8,
+    wots_len1: 32,
+    wots_len2: 2,
+    wots_len: 34,
+    wots_sig_bytes: 1088,
+    full_height: 20,
+    tree_height: 20,
     d: 1,
     index_bytes: 4,
-    sig_bytes: 2500,
+    sig_bytes: 1764,
     pk_bytes: 64,
-    sk_bytes: 1373,
+    sk_bytes: 2573,
     bds_k: 0,
 };
 
