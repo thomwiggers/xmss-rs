@@ -50,6 +50,8 @@ const XMSS_SETTINGS: XMSSParams = XMSSParams{
 };
 
 pub fn verify(msg: &[u8], sig: &[u8], pk: &[u8]) -> bool {
+    assert_eq!(sig.len(), XMSS_SETTINGS.sig_bytes as usize);
+    assert_eq!(pk.len(), XMSS_SETTINGS.pk_bytes as usize);
     let res = unsafe {
         xmss_core_sign_verify(
             &XMSS_SETTINGS as *const _,
@@ -81,6 +83,7 @@ pub fn keypair() -> (Vec<u8>, Vec<u8>) {
 
 pub fn sign(sk: &mut [u8], msg: &[u8]) -> Vec<u8> {
     let mut sig = Vec::with_capacity(XMSS_SETTINGS.sig_bytes as usize);
+    assert_eq!(sk.len(), XMSS_SETTINGS.sk_bytes as usize);
 
     let res = unsafe {
         xmss_core_sign_signature(

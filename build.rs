@@ -20,8 +20,8 @@ fn main() {
 
     cc::Build::new()
         .flag("-std=c11")
-        .flag("-g3")
         .flag("-march=native")
+        .flag("-Ofast")
         .include("xmss-reference")
         .files(xmss_files.into_iter())
         .compile("xmss");
