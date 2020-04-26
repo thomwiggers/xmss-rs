@@ -1,5 +1,8 @@
 use std::os::raw;
 
+mod settings;
+use settings::XMSS_SETTINGS;
+
 #[repr(C)]
 struct XMSSParams {
     func: raw::c_uint,
@@ -28,26 +31,6 @@ extern "C" {
     fn xmss_core_sign_signature(params: *const XMSSParams, sk: *mut raw::c_uchar, sig: *mut raw::c_uchar, m: *const raw::c_uchar, mlen: raw::c_ulonglong) -> raw::c_int;
 
 }
-
-// use checkparams script
-const XMSS_SETTINGS: XMSSParams = XMSSParams{
-    func: 1,
-    n: 16,
-    wots_w: 16,
-    wots_log_w: 4,
-    wots_len1: 32,
-    wots_len2: 3,
-    wots_len: 35,
-    wots_sig_bytes: 560,
-    full_height: 20,
-    tree_height: 20,
-    d: 1,
-    index_bytes: 4,
-    sig_bytes: 900,
-    pk_bytes: 32,
-    sk_bytes: 1373,
-    bds_k: 0,
-};
 
 pub fn verify(msg: &[u8], sig: &[u8], pk: &[u8]) -> bool {
     assert_eq!(sig.len(), XMSS_SETTINGS.sig_bytes as usize);
