@@ -14,8 +14,8 @@ fn main() {
         xmss_dir.join("wots.c"),
         xmss_dir.join("xmss.c"),
         xmss_dir.join("xmss_commons.c"),
-        xmss_dir.join("xmss_core.c"),
-        //xmss_dir.join("xmss_core_fast.c"),
+        //xmss_dir.join("xmss_core.c"),
+        xmss_dir.join("xmss_core_fast.c"),
     ];
 
     cc::Build::new()

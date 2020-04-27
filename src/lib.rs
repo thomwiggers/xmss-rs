@@ -26,9 +26,9 @@ struct XMSSParams {
 
 #[link(name = "xmss")]
 extern "C" {
-    fn xmss_core_sign_verify(params: *const XMSSParams, m: *const raw::c_uchar, mlen: raw::c_ulonglong, sig: *const raw::c_uchar, pk: *const raw::c_uchar) -> raw::c_int;
-    fn xmss_core_keypair(params: *const XMSSParams, pk: *mut raw::c_uchar, sk: *mut raw::c_uchar) -> raw::c_int;
-    fn xmss_core_sign_signature(params: *const XMSSParams, sk: *mut raw::c_uchar, sig: *mut raw::c_uchar, m: *const raw::c_uchar, mlen: raw::c_ulonglong) -> raw::c_int;
+    fn xmssmt_core_sign_verify(params: *const XMSSParams, m: *const raw::c_uchar, mlen: raw::c_ulonglong, sig: *const raw::c_uchar, pk: *const raw::c_uchar) -> raw::c_int;
+    fn xmssmt_core_keypair(params: *const XMSSParams, pk: *mut raw::c_uchar, sk: *mut raw::c_uchar) -> raw::c_int;
+    fn xmssmt_core_sign_signature(params: *const XMSSParams, sk: *mut raw::c_uchar, sig: *mut raw::c_uchar, m: *const raw::c_uchar, mlen: raw::c_ulonglong) -> raw::c_int;
 
 }
 
@@ -36,7 +36,7 @@ pub fn verify(msg: &[u8], sig: &[u8], pk: &[u8]) -> bool {
     assert_eq!(sig.len(), XMSS_SETTINGS.sig_bytes as usize);
     assert_eq!(pk.len(), XMSS_SETTINGS.pk_bytes as usize);
     let res = unsafe {
-        xmss_core_sign_verify(
+        xmssmt_core_sign_verify(
             &XMSS_SETTINGS as *const _,
             msg.as_ptr(), msg.len() as raw::c_ulonglong,
             sig.as_ptr(), pk.as_ptr())
@@ -50,7 +50,7 @@ pub fn keypair() -> (Vec<u8>, Vec<u8>) {
     let mut sk = Vec::with_capacity(XMSS_SETTINGS.sk_bytes as usize);
 
     let res = unsafe {
-        xmss_core_keypair(
+        xmssmt_core_keypair(
             &XMSS_SETTINGS as *const _,
             pk.as_mut_ptr(), sk.as_mut_ptr())
     };
@@ -69,7 +69,7 @@ pub fn sign(sk: &mut [u8], msg: &[u8]) -> Vec<u8> {
     assert_eq!(sk.len(), XMSS_SETTINGS.sk_bytes as usize);
 
     let res = unsafe {
-        xmss_core_sign_signature(
+        xmssmt_core_sign_signature(
             &XMSS_SETTINGS as *const _,
             sk.as_mut_ptr(),
             sig.as_mut_ptr(),
