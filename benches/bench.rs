@@ -1,6 +1,9 @@
 #![feature(test)]
 extern crate test;
 
+#[macro_use]
+extern crate lazy_static;
+
 use test::Bencher;
 
 mod bench_xmss {
@@ -15,17 +18,21 @@ mod bench_xmss {
         b.iter(|| keypair());
     }
 
+    lazy_static! {
+        static ref KEYPAIR: (Vec<u8>, Vec<u8>) = keypair();
+    }
+
     #[bench]
     fn bench_sign(b: &mut Bencher) {
         let msg = [0u8; 100];
-        let (_pk, mut sk) = keypair();
+        let (_pk, mut sk) = KEYPAIR.clone();
         b.iter(|| sign(&mut sk, &msg));
     }
 
     #[bench]
     fn bench_verify(b: &mut Bencher) {
         let msg = [0u8; 100];
-        let (pk, mut sk) = keypair();
+        let (pk, mut sk) = KEYPAIR.clone();
         let sig = sign(&mut sk, &msg);
         b.iter(|| verify(&msg, &sig, &pk));
     }
