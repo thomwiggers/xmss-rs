@@ -13,6 +13,7 @@ mod bench_xmss {
         keypair, sign, verify
     };
 
+    #[ignore]
     #[bench]
     fn bench_keypair(b: &mut Bencher) {
         b.iter(|| keypair());
