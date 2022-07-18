@@ -1,5 +1,6 @@
 extern crate cc;
 
+use std::env;
 use std::path::Path;
 
 fn main() {
@@ -18,13 +19,18 @@ fn main() {
         xmss_dir.join("xmss_core_fast.c"),
     ];
 
-    cc::Build::new()
+    let mut builder = cc::Build::new();
+    builder
         .flag("-std=c11")
         .flag("-march=native")
         .flag("-Ofast")
         .include("xmss-reference")
-        .files(xmss_files.into_iter())
-        .compile("xmss");
+        .files(xmss_files.into_iter());
+
+    if let Some(dir) = env::var_os("OPENSSL_ROOT_DIR") {
+        let includepath = Path::new(&dir).join("include");
+        builder.include(includepath);
+    }
 
     println!("cargo:rustc-link-lib=crypto");
 }
