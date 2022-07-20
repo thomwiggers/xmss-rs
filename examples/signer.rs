@@ -3,7 +3,6 @@ use std::io::prelude::*;
 
 use xmss_rs::sign;
 
-
 fn parseargs() -> (String, String, String) {
     let args: Vec<String> = std::env::args().collect();
     if args.len() != 4 {

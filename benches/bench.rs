@@ -9,9 +9,7 @@ use test::Bencher;
 mod bench_xmss {
     use super::*;
 
-    use xmss_rs::{
-        keypair, sign, verify
-    };
+    use xmss_rs::{keypair, sign, verify};
 
     #[ignore]
     #[bench]

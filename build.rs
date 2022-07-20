@@ -30,6 +30,8 @@ fn main() {
     if let Some(dir) = env::var_os("OPENSSL_ROOT_DIR") {
         let includepath = Path::new(&dir).join("include");
         builder.include(includepath);
+        let libdir = Path::new(&dir).join("lib");
+        println!("cargo:rustc-link-search={}", libdir.display());
     }
 
     println!("cargo:rustc-link-lib=crypto");
