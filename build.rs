@@ -33,6 +33,7 @@ fn main() {
         let libdir = Path::new(&dir).join("lib");
         println!("cargo:rustc-link-search={}", libdir.display());
     }
+    builder.compile("xmss");
 
     println!("cargo:rustc-link-lib=crypto");
 }
