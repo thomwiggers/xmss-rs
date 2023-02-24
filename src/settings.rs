@@ -2,7 +2,8 @@ use crate::XMSSParams;
 
 const fn xmss_params(n: u32) -> XMSSParams {
     let wots_w: u32 = 256;
-    let wots_len1 = 8 * n / wots_w.ilog2();
+    let wots_log_w = 8;
+    let wots_len1 = 8 * n / wots_log_w;
     let wots_len2 = if wots_w == 256 { 2 } else { panic!("Invalid") };
     let wots_len = wots_len1 + wots_len2;
     let wots_sig_bytes = n * wots_len;
@@ -39,7 +40,7 @@ const fn xmss_params(n: u32) -> XMSSParams {
         func: 1,
         n,
         wots_w,
-        wots_log_w: wots_w.ilog2(), // log2(w)
+        wots_log_w, // log2(w)
         wots_len1,
         wots_len2,
         wots_len,
