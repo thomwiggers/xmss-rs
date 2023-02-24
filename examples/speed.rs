@@ -9,7 +9,6 @@ use xmss_rs::level3::{keypair, sign, verify};
 #[cfg(feature = "level5")]
 use xmss_rs::level3::{keypair, sign, verify};
 
-
 fn main() -> std::io::Result<()> {
     let iterations: u128 = match env::var("ITERATIONS") {
         Ok(val) => val.parse::<u128>().unwrap(),
@@ -56,10 +55,7 @@ fn main() -> std::io::Result<()> {
     };
     println!(
         "{{ \"name\": \"{}\", \"keypair\": {}, \"sign\": {}, \"verify\": {} }}",
-        name,
-        keypair_time,
-        signing_time,
-        verify_time
+        name, keypair_time, signing_time, verify_time
     );
     Ok(())
 }
