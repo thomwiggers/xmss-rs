@@ -1,7 +1,12 @@
 use std::fs::File;
 use std::io::prelude::*;
 
-use xmss_rs::keypair;
+#[cfg(feature = "level1")]
+use xmss_rs::level1::keypair;
+#[cfg(feature = "level3")]
+use xmss_rs::level3::keypair;
+#[cfg(feature = "level5")]
+use xmss_rs::level3::keypair;
 
 fn main() -> std::io::Result<()> {
     let (pk, sk) = keypair();

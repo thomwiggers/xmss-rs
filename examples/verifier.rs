@@ -1,6 +1,11 @@
 use std::fs;
 
-use xmss_rs::verify;
+#[cfg(feature = "level1")]
+use xmss_rs::level1::verify;
+#[cfg(feature = "level3")]
+use xmss_rs::level3::verify;
+#[cfg(feature = "level5")]
+use xmss_rs::level3::verify;
 
 fn parseargs() -> (String, String, String) {
     let args: Vec<String> = std::env::args().collect();

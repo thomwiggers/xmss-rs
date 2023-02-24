@@ -7,6 +7,11 @@ links = "xmss"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+level1 = []
+level3 = []
+level5 = []
+
 [dependencies]
 
 [build-dependencies]
