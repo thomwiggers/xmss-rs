@@ -6,7 +6,7 @@ use xmss_rs::level1::sign;
 #[cfg(feature = "level3")]
 use xmss_rs::level3::sign;
 #[cfg(feature = "level5")]
-use xmss_rs::level3::sign;
+use xmss_rs::level5::sign;
 
 fn parseargs() -> (String, String, String) {
     let args: Vec<String> = std::env::args().collect();

@@ -6,7 +6,7 @@ use xmss_rs::level1::keypair;
 #[cfg(feature = "level3")]
 use xmss_rs::level3::keypair;
 #[cfg(feature = "level5")]
-use xmss_rs::level3::keypair;
+use xmss_rs::level5::keypair;
 
 fn main() -> std::io::Result<()> {
     let (pk, sk) = keypair();
